@@ -55,15 +55,17 @@ a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:po
 /* Nav */
 .nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 28px;background:var(--nav);backdrop-filter:blur(16px);border-bottom:1px solid var(--soft)}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
-.mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--dark));box-shadow:0 0 18px rgba(30,140,255,.4)}
+/* ВСТРОЕННЫЙ SVG ЛОГОТИП (работает сразу) */
+.mark{width:34px;height:34px;filter:drop-shadow(0 0 10px rgba(30,140,255,0.6));}
 .logo b{color:var(--blue2)}
 .links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--dim)}
 .links a:hover{color:var(--text)}
 .act{display:flex;gap:10px;align-items:center}
 .tt{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(30,140,255,.1);display:grid;place-items:center}
 .tt:hover{background:rgba(30,140,255,.2)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;font-weight:600;font-size:14px;border-radius:10px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;font-weight:600;font-size:14px;border-radius:10px;white-space:nowrap; transition: all 0.2s;}
 .pri{background:linear-gradient(135deg,var(--blue),var(--dark));color:#fff;box-shadow:0 4px 20px rgba(30,140,255,.3)}
+.pri:hover{filter:brightness(1.1);transform:translateY(-1px)}
 .gh{background:rgba(30,140,255,.08);border:1px solid var(--line)}
 .gh:hover{border-color:var(--blue);background:rgba(30,140,255,.15)}
 .lg{padding:15px 30px;font-size:15px;border-radius:12px}
@@ -117,17 +119,37 @@ h1{font-size:clamp(34px,4.6vw,56px);font-weight:900;line-height:1.08;letter-spac
 .fi{width:46px;height:46px;border-radius:11px;display:grid;place-items:center;font-size:22px;background:rgba(30,140,255,.1);border:1px solid rgba(30,140,255,.2);margin-bottom:16px}
 .f h3{font-size:16.5px;margin-bottom:8px}.f p{font-size:13.5px;color:var(--dim)}
 
-/* Tiers */
-.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.tier{padding:24px;border-radius:16px;background:var(--pan);border:1px solid var(--soft);display:flex;flex-direction:column;position:relative}
-.tier:hover{border-color:var(--line)}
-.tier.pro{border-color:var(--blue);box-shadow:0 0 20px rgba(30,140,255,.15)}
-.tier h3{font-size:18px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
-.tier .price{font-size:26px;font-weight:900;margin-bottom:16px;color:var(--blue2)}
-.tier ul{list-style:none;font-size:13.5px;color:var(--dim);display:flex;flex-direction:column;gap:8px;flex:1;margin-bottom:20px}
-.tier ul li::before{content:"✓";color:var(--green);margin-right:6px;font-weight:bold}
-.bdg-tb{font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;background:var(--blue);color:#fff;letter-spacing:.5px}
-.tnote{text-align:center;color:var(--dim);font-size:13px;margin-top:22px}
+/* === МАГАЗИН И КОСМЕТИКА === */
+.shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+.shop-tier { padding: 26px; border-radius: 16px; background: var(--pan); border: 1px solid var(--soft); display: flex; flex-direction: column; position: relative; transition: all .2s; }
+.shop-tier:hover { border-color: var(--line); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.1); }
+.shop-tier.hot { border-color: var(--blue); box-shadow: 0 0 20px rgba(30,140,255,.15); }
+.shop-tier .hot-tag { position: absolute; top: -10px; right: 14px; background: linear-gradient(90deg, var(--blue2), var(--blue)); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; letter-spacing: .5px; }
+.shop-tier h3 { font-size: 20px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.shop-tier .price-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+.shop-tier .pc { font-size: 13px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 8px; color: var(--dim); white-space: nowrap; }
+.shop-tier .pc.main { color: var(--text); border-color: var(--blue); background: rgba(30,140,255,.1); font-weight: 700; font-size: 15px; }
+.shop-tier ul { list-style: none; font-size: 13.5px; color: var(--dim); display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; flex: 1; }
+.shop-tier ul li::before { content: "✓"; color: var(--green); margin-right: 6px; font-weight: bold; }
+.shop-tier .btn { width: 100%; margin-top: auto; }
+.bdg-tb { font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; color: #fff; letter-spacing: .5px; }
+
+.cosmetic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.cosmetic-card { background: var(--pan); border: 1px solid var(--soft); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; transition: border-color .2s; }
+.cosmetic-card:hover { border-color: var(--blue); }
+.cosmetic-prev { height: 80px; background: var(--bg2); border-radius: 10px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+.cosmetic-card h4 { font-size: 16px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.cosmetic-card p { font-size: 13px; color: var(--dim); flex: 1; margin-bottom: 16px; }
+.cosmetic-card .foot { display: flex; justify-content: space-between; align-items: center; }
+.cosmetic-card .c-price { font-size: 16px; font-weight: 800; color: var(--blue2); }
+
+@keyframes pulse-cursor { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+@keyframes spin-aura { to { transform: rotate(360deg); } }
+.cursor-icon { width: 32px; height: 32px; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M8 4L24 14L16 16L12 24Z" fill="%231e8cff" stroke="%23fff" stroke-width="1.5"/></svg>'); background-size: contain; background-repeat: no-repeat; animation: pulse-cursor 2s infinite; }
+.aura-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text); position: relative; }
+.aura-icon::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid #a46bff; animation: spin-aura 3s linear infinite; }
+.badge-icon { padding: 4px 12px; border-radius: 8px; background: linear-gradient(90deg, #ff6ad5, #a46bff); color: #fff; font-weight: 800; font-size: 12px; letter-spacing: 1px; }
+.tnote{text-align:center; color:var(--dim); font-size:13px; margin-top:22px}
 
 /* Download */
 .dlbox{padding:60px 40px;border-radius:24px;text-align:center;border:1px solid var(--line);background:radial-gradient(ellipse at 30% 20%,rgba(30,140,255,.15),transparent 55%),linear-gradient(135deg,var(--pan),var(--bg2))}
@@ -175,7 +197,6 @@ footer{position:relative;z-index:1;border-top:1px solid var(--soft);padding:44px
   .hero{grid-template-columns:1fr;padding:40px 0 60px}
   .stats{grid-template-columns:1fr 1fr}
   .feats{grid-template-columns:1fr 1fr}
-  .tiers{grid-template-columns:1fr 1fr}
   .mb{grid-template-columns:1fr}
   .side{display:none}
 }
@@ -185,7 +206,6 @@ footer{position:relative;z-index:1;border-top:1px solid var(--soft);padding:44px
   .wrap{padding:0 16px}
   section{padding:64px 0}
   .feats{grid-template-columns:1fr}
-  .tiers{grid-template-columns:1fr}
   .st{grid-template-columns:1fr}
   .dlbox{padding:40px 20px}
   .dl{width:100%}
@@ -197,8 +217,26 @@ footer{position:relative;z-index:1;border-top:1px solid var(--soft);padding:44px
 <body>
 
 <header class="nav">
-  <a href="#" class="logo"><div class="mark"></div><span>MNA <b>Launcher</b></span></a>
-  <nav class="links"><a href="#features">Возможности</a><a href="#tiers">Уровни</a><a href="#download">Скачать</a><a href="#faq">FAQ</a></nav>
+  <a href="#" class="logo">
+    <!-- КРАСИВЫЙ ВСТРОЕННЫЙ SVG ЛОГОТИП -->
+    <svg class="mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15 85V15L50 55L85 15V85" stroke="url(#logo-grad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M15 85V15L50 55L85 15V85" stroke="#fff" stroke-opacity="0.2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <defs>
+        <linearGradient id="logo-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#5cc8ff"/>
+          <stop offset="1" stop-color="#1e8cff"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span>MNA <b>Launcher</b></span>
+  </a>
+  <nav class="links">
+    <a href="#features">Возможности</a>
+    <a href="#shop">Магазин</a>
+    <a href="#download">Скачать</a>
+    <a href="#faq">FAQ</a>
+  </nav>
   <div class="act">
     <button class="tt" id="tt" aria-label="Переключить тему">🌓</button>
     <a href="#" class="btn pri" data-dl>Скачать</a>
@@ -276,50 +314,129 @@ footer{position:relative;z-index:1;border-top:1px solid var(--soft);padding:44px
   </div>
 </section>
 
-<section id="tiers" class="wrap">
+<!-- МАГАЗИН -->
+<section id="shop" class="wrap">
   <div class="head">
-    <span class="kick">Уровни</span>
+    <span class="kick">Магазин</span>
     <h2>Прокачай свой <span class="grad">лаунчер</span></h2>
-    <p>Базовые функции бесплатны. Уровни открывают косметические улучшения.</p>
+    <p>Базовые функции бесплатны. Уровни открывают косметические улучшения, а кастомные курсоры сделают игру ещё приятнее.</p>
   </div>
-  <div class="tiers">
-    <div class="tier">
+
+  <!-- Уровни -->
+  <div class="shop-grid" style="margin-bottom: 50px;">
+    <!-- Free -->
+    <div class="shop-tier">
       <h3>Free</h3>
-      <div class="price">Бесплатно</div>
+      <div class="price-chips"><span class="pc main">Бесплатно</span></div>
       <ul>
         <li>Базовые темы</li>
         <li>Свой акцентный цвет</li>
         <li>Друзья и чат</li>
       </ul>
+      <button class="btn gh" disabled>Текущий уровень</button>
     </div>
-    <div class="tier">
+
+    <!-- Plus -->
+    <div class="shop-tier">
       <h3>Plus <span class="bdg-tb" style="background:#ffc94d;color:#000">PLUS</span></h3>
-      <div class="price">$0.99</div>
+      <div class="price-chips">
+        <span class="pc main">149 ₽</span>
+        <span class="pc">≈ $1.99</span>
+      </div>
       <ul>
         <li>Любые цвета интерфейса</li>
         <li>Скругление углов и шрифты</li>
         <li>Свой логотип лаунчера</li>
       </ul>
+      <button class="btn pri" data-buy="Plus">Купить Plus</button>
     </div>
-    <div class="tier">
+
+    <!-- Plus+ -->
+    <div class="shop-tier hot">
+      <div class="hot-tag">Популярный</div>
       <h3>Plus+ <span class="bdg-tb" style="background:#ff6ad5">PLUS+</span></h3>
-      <div class="price">$2.99</div>
+      <div class="price-chips">
+        <span class="pc main">299 ₽</span>
+        <span class="pc">≈ $3.99</span>
+      </div>
       <ul>
         <li>Всё из Plus</li>
         <li>Свой фон (картинка)</li>
+        <li>Затемнение и размытие</li>
       </ul>
+      <button class="btn pri" data-buy="Plus+">Купить Plus+</button>
     </div>
-    <div class="tier pro">
+
+    <!-- Pro -->
+    <div class="shop-tier">
       <h3>Pro <span class="bdg-tb" style="background:linear-gradient(90deg,#ff6ad5,#a46bff)">PRO</span></h3>
-      <div class="price">$4.99</div>
+      <div class="price-chips">
+        <span class="pc main">499 ₽</span>
+        <span class="pc">≈ $5.99</span>
+      </div>
       <ul>
         <li>Всё из Plus+</li>
         <li>Анимированный фон (GIF/MP4)</li>
         <li>Стильный ник (градиент, радуга)</li>
       </ul>
+      <button class="btn pri" data-buy="Pro">Купить Pro</button>
     </div>
   </div>
-  <p class="tnote">Как получить уровень и условия оплаты — спрашивай в <a href="https://discord.gg/5yVNyNgMSk" target="_blank" rel="noopener" style="color:var(--blue2);text-decoration:underline">Discord</a>.</p>
+
+  <!-- Косметика -->
+  <div class="head" style="margin-top: 60px; margin-bottom: 30px;">
+    <span class="kick">Косметика</span>
+    <h2>Стиль в каждой <span class="grad">детали</span></h2>
+    <p>Кастомные курсоры и эффекты профиля. Работает во всём лаунчере и видно друзьям.</p>
+  </div>
+
+  <div class="cosmetic-grid">
+    <!-- Курсор Неон -->
+    <div class="cosmetic-card">
+      <div class="cosmetic-prev"><div class="cursor-icon"></div></div>
+      <h4>Курсор «Неон» <span class="bdg-tb" style="background:var(--blue)">NEW</span></h4>
+      <p>Светящийся курсор с плавной анимацией. Выделит тебя среди других игроков.</p>
+      <div class="foot">
+        <span class="c-price">49 ₽</span>
+        <button class="btn gh" data-buy="Курсор Неон">Купить</button>
+      </div>
+    </div>
+
+    <!-- Эффект Аура -->
+    <div class="cosmetic-card">
+      <div class="cosmetic-prev"><div class="aura-icon">S</div></div>
+      <h4>Эффект профиля «Аура»</h4>
+      <p>Вращающаяся анимированная рамка вокруг твоего аватара в чатах и профиле.</p>
+      <div class="foot">
+        <span class="c-price">99 ₽</span>
+        <button class="btn gh" data-buy="Аура профиля">Купить</button>
+      </div>
+    </div>
+
+    <!-- Значок Основатель -->
+    <div class="cosmetic-card">
+      <div class="cosmetic-prev"><div class="badge-icon">FOUNDER</div></div>
+      <h4>Значок «Основатель»</h4>
+      <p>Эксклюзивный значок рядом с ником. Виден всем в глобальном чате и списке друзей.</p>
+      <div class="foot">
+        <span class="c-price">199 ₽</span>
+        <button class="btn gh" data-buy="Значок Основатель">Купить</button>
+      </div>
+    </div>
+
+    <!-- Звук входа -->
+    <div class="cosmetic-card">
+      <div class="cosmetic-prev"><span style="font-size:32px">🔊</span></div>
+      <h4>Звук входа</h4>
+      <p>Приятный звук при подключении к серверу. Все услышат, что ты зашёл в игру.</p>
+      <div class="foot">
+        <span class="c-price">79 ₽</span>
+        <button class="btn gh" data-buy="Звук входа">Купить</button>
+      </div>
+    </div>
+  </div>
+  
+  <p class="tnote" style="margin-top:30px;">Оплата и выдача уровней/косметики происходит через <a href="https://discord.gg/5yVNyNgMSk" target="_blank" rel="noopener" style="color:var(--blue2);text-decoration:underline">Discord</a> или автоматически в самом лаунчере (вкладка «Внешний вид»).</p>
 </section>
 
 <section id="download" class="wrap">
@@ -343,7 +460,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--soft);padding:44px
     <details><summary>Как установить?</summary><div class="ans"><ol><li>Скачай ZIP-архив.</li><li>Распакуй его в любую папку (не запускай из архива).</li><li>Запусти лаунчер из распакованной папки.</li></ol></div></details>
     <details><summary>Это безопасно? Какие данные хранятся?</summary><div class="ans">В версии 0.17.0 мы добавили проверку контрольных сумм для всех загрузок. Пароль от аккаунта MNA хранится на сервере только в виде хеша, а токены входа в игру — на твоём компьютере в зашифрованном виде. Подробнее — в <a href="#" data-open="mPol" style="color:var(--blue2);text-decoration:underline">политике конфиденциальности</a>.</div></details>
     <details><summary>Как пригласить друга в игру?</summary><div class="ans">Открой вкладку «Друзья», выбери друга и нажми «Пригласить». Если он в сети, ему придёт уведомление с кнопкой «Играть». Нажатие запустит Minecraft и подключит к твоему серверу.</div></details>
-    <details><summary>Что дают уровни Plus и Pro?</summary><div class="ans">Это косметические улучшения: кастомные фоны, анимированные обои, шрифты и стильные ники в чатах. Все основные функции (игра, моды, друзья, чат) бесплатны.</div></details>
+    <details><summary>Что дают уровни Plus и Pro?</summary><div class="ans">Это косметические улучшения: кастомные фоны, анимированные обои, шрифты и стильные ники в чатах. Также можно купить кастомные курсоры и эффекты профиля (аура). Все основные функции (игра, моды, друзья, чат) бесплатны.</div></details>
     <details><summary>Можно ли перенести миры и моды?</summary><div class="ans">Да. Всё лежит в <code>%APPDATA%\.mna</code>. Папка <code>instances</code> — сборки, внутри каждой <code>saves</code> с мирами.</div></details>
   </div>
 </section>
@@ -353,12 +470,19 @@ footer{position:relative;z-index:1;border-top:1px solid var(--soft);padding:44px
   <div class="wrap">
     <div class="fg">
       <div>
-        <div class="logo" style="margin-bottom:12px"><div class="mark"></div><span>MNA <b>Launcher</b></span></div>
+        <!-- ВСТРОЕННЫЙ SVG ЛОГОТИП В ПОДВАЛЕ -->
+        <div class="logo" style="margin-bottom:12px">
+          <svg class="mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 85V15L50 55L85 15V85" stroke="url(#logo-grad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15 85V15L50 55L85 15V85" stroke="#fff" stroke-opacity="0.2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>MNA <b>Launcher</b></span>
+        </div>
         <p>Неофициальный лаунчер для Minecraft. Не связан с Mojang Studios и Microsoft.</p>
       </div>
       <div>
         <a href="#features">Возможности</a>
-        <a href="#tiers">Уровни</a>
+        <a href="#shop">Магазин</a>
         <a href="#download">Скачать</a>
         <a href="#" data-open="mVer">Все версии</a>
       </div>
@@ -408,7 +532,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--soft);padding:44px
   <p style="margin-top:12px;color:var(--dim);font-size:14px">MNA Launcher — программа, не связанная с Mojang и Microsoft. Предоставляется «как есть». Мы не отвечаем за бан на серверах или потерю миров, поэтому делай резервные копии папки <code>saves</code>.</p>
   <ul>
     <li>Основные функции (игра, моды, друзья, чат) бесплатны.</li>
-    <li>Уровни Plus, Plus+ и Pro дают только косметические возможности и не влияют на игру.</li>
+    <li>Уровни Plus, Plus+ и Pro, а также кастомная косметика дают только визуальные улучшения и не влияют на геймплей.</li>
     <li>Условия оплаты и возврата уточняй в Discord до покупки.</li>
     <li>За нарушение правил в чате (оскорбления, спам) аккаунт MNA может быть заблокирован.</li>
     <li>Запрещено продавать лаунчер или выдавать его за свой.</li>
@@ -418,9 +542,6 @@ footer{position:relative;z-index:1;border-top:1px solid var(--soft);padding:44px
 <script>
 // ==========================================
 // НАСТРОЙКА ВЕРСИЙ ЗДЕСЬ
-// Новая версия добавляется сверху, у неё latest: true.
-// У всех старых versions ставь latest: false.
-// Файлы лежат в репозитории GitHub (ветка main).
 // ==========================================
 const REPO_RAW = "https://github.com/mishahakobyan202-code/MNA-Launcher/raw/main/";
 
@@ -443,10 +564,8 @@ const VERSIONS = [
 
 const latest = VERSIONS.find(v => v.latest) || VERSIONS[0];
 
-// Номер актуальной версии во всех местах сайта
 document.querySelectorAll('.ver').forEach(e => e.textContent = latest.version);
 
-// История версий
 document.getElementById('vl').innerHTML = VERSIONS.map(v => `
   <div class="v">
     <div>
@@ -458,17 +577,31 @@ document.getElementById('vl').innerHTML = VERSIONS.map(v => `
   </div>
 `).join('');
 
-// Все кнопки «Скачать» ведут на актуальную версию
 document.querySelectorAll('[data-dl]').forEach(a => {
   a.href = latest.url;
   a.rel = 'noopener';
 });
 
-// Модалки
-const close = () => { document.querySelectorAll('.ov.open').forEach(o => o.classList.remove('open')); document.body.style.overflow = ''; };
-document.querySelectorAll('[data-open]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); close(); document.getElementById(a.dataset.open).classList.add('open'); document.body.style.overflow = 'hidden'; }));
-document.querySelectorAll('.ov').forEach(o => o.addEventListener('click', e => { if (e.target === o || e.target.closest('.x')) close(); }));
-document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+// ИСПРАВЛЕННАЯ ФУНКЦИЯ ЗАКРЫТИЯ ОКОН (чтобы кнопки работали)
+const closeModal = () => { 
+  document.querySelectorAll('.ov.open').forEach(o => o.classList.remove('open')); 
+  document.body.style.overflow = ''; 
+};
+
+document.querySelectorAll('[data-open]').forEach(a => a.addEventListener('click', e => { 
+  e.preventDefault(); 
+  closeModal(); 
+  document.getElementById(a.dataset.open).classList.add('open'); 
+  document.body.style.overflow = 'hidden'; 
+}));
+
+document.querySelectorAll('.ov').forEach(o => o.addEventListener('click', e => { 
+  if (e.target === o || e.target.closest('.x')) closeModal(); 
+}));
+
+document.addEventListener('keydown', e => { 
+  if (e.key === 'Escape') closeModal(); 
+});
 
 // Тема
 const root = document.documentElement;
@@ -477,6 +610,16 @@ document.getElementById('tt').addEventListener('click', () => {
   const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches;
   root.dataset.theme = dark ? 'light' : 'dark';
   try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+});
+
+// КНОПКИ МАГАЗИНА (ТЕПЕРЬ РАБОТАЮТ)
+document.querySelectorAll('[data-buy]').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const item = btn.dataset.buy;
+    alert(`Спасибо за интерес к "${item}"!\n\nПока автоматическая оплата на сайте не подключена, напиши нам в Discord, и мы поможем с покупкой и активацией кода.`);
+    window.open('https://discord.gg/5yVNyNgMSk', '_blank');
+  });
 });
 </script>
 </body>
